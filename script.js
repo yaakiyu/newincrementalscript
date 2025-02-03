@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         New Incremental Script
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  新しい放置ゲームで使える便利スクリプトです。
 // @author       yaakiyu
 // @match        https://dem08656775.github.io/newincrementalgame/
 // @grant        none
+// @license      MIT
 // ==/UserScript==
 
 (function() {
