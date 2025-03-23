@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         New Incremental Script
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1.2
 // @description  新しい放置ゲームで使える便利スクリプトです。
 // @author       yaakiyu
 // @match        https://dem08656775.github.io/newincrementalgame/
@@ -32,6 +32,24 @@
     bt.onclick = dataCopyButton;
     bt.innerHTML = "データコピー";
     document.getElementById("exportsave").parentElement.lastElementChild.after(bt);
+
+    // ペーストボタン
+    function dataPasteButton(){
+        navigator.clipboard.readText().then((input) => {
+          if (window.confirm("データを貼り付けしますか？")){
+            localStorage.setItem("playerStoredb",input);
+            ctx.dataload();
+            ctx.load(0);
+          }
+        })
+    }
+
+    const bt2 = document.createElement("button");
+    bt2.type = "button";
+    bt2.id = "importsave_clipboard";
+    bt2.onclick = dataPasteButton;
+    bt2.innerHTML = "データ貼り付け";
+    document.getElementById("importsave").parentElement.lastElementChild.after(bt2);
 
     // 設定タブを開いた際に以前エクスポートしていた古いデータを削除
     const optionButton = document.getElementById("option");
@@ -94,7 +112,7 @@
     // const tabs = document.getElementsByClassName("tabs")[0];
     // function newClicked(original) {
     //     function tabButtonClicked() {
-    //         if (original) {original();}
+    //         if (typeof original == 'function') {original();}
     //         for (const tab of tabs.children) {
     //             tab.children[0].classList.remove("selected"); // 一旦すべて白にする
     //         }
